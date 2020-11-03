@@ -297,7 +297,6 @@ For Emacs 25 or later, support for [[https://kungsgeten.github.io/org-brain.html
 package documentation]] for more information.
 
 ** Org-roam support
-
 To install org-roam support set the variable =org-enable-roam-support= to =t=.
 
 #+BEGIN_SRC emacs-lisp
@@ -529,7 +528,7 @@ are also available.
 | ~SPC m s k~   | org-move-subtree-up             |
 | ~SPC m s j~   | org-move-subtree-down           |
 | ~SPC m s n~   | org-narrow-to-subtree           |
-| ~SPC m s N~   | widen narrowed subtree          |
+| ~SPC m s w~   | widen narrowed subtree          |
 | ~SPC m s r~   | org-refile                      |
 | ~SPC m s s~   | show sparse tree                |
 | ~SPC m s S~   | sort trees                      |
@@ -902,10 +901,9 @@ Key binding prefixes:
 | ~SPC m r q~ | Kill current response headers buffer and its window |
 
 ** Org-roam
-
 Key binding prefixes:
- - ~SPC a o r~ (anywhere)
- - ~SPC m r~   (in an org-mode buffer)
+- ~SPC a o r~ (anywhere)
+- ~SPC m r~ (in an org-mode buffer)
 
 | Key binding      | Description                           |
 |------------------+---------------------------------------|
