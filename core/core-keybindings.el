@@ -74,23 +74,11 @@ used as the prefix command."
                   " " (substring prefix 1))))
     (unless long-name (setq long-name name))
     (let ((prefix-name (cons name long-name))
-          (map (intern (format "%s-map" mode))))
-      ;; It should be safe to add replacements into the mode map if
-      ;; it exists.
-      ;; FIXME: Figure out how this brakes inserting spaces.
-      (if nil ;; ((boundp map))
-          (progn
-            ;; NOTE: Looks like `which-key-add-keymap-based-replacements'
-            ;;       doesn't support short + long name pair.
-            (which-key-add-keymap-based-replacements
-              (symbol-value map) full-prefix name)
-            (when is-major-mode-prefix
-              (when dotspacemacs-major-mode-leader-key
-                (which-key-add-keymap-based-replacements
-                  (symbol-value map) major-mode-prefix name))
-              (when dotspacemacs-major-mode-emacs-leader-key
-                (which-key-add-keymap-based-replacements
-                  (symbol-value map) major-mode-prefix-emacs name))))
+          (is-minor-mode-prefix (not is-major-mode-prefix))
+          (smap (intern (format "spacemacs-%s-map" mode))))
+      (if (spacemacs//init-leader-mode-map mode smap is-minor-mode-prefix)
+          (which-key-add-keymap-based-replacements (symbol-value smap)
+            (if is-major-mode-prefix (substring prefix 1) prefix) `(,name))
         (which-key-add-major-mode-key-based-replacements mode
           full-prefix-emacs prefix-name
           full-prefix prefix-name)
